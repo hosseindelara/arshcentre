@@ -11,46 +11,46 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { Col, Row } from 'react-bootstrap'
 
-export default function Home({dataFetch}) {
+export default function Home({ dataFetch }) {
 
 
 
-const router = useRouter()
+  const router = useRouter()
 
-useEffect(() => {
-  if(dataFetch.data){
+  useEffect(() => {
+    if (dataFetch.data) {
 
-  }
-  else{
-    router.push('/login')
-  }
-  return () => {
-    
-  }
-}, [])
+    }
+    else {
+      router.push('/login')
+    }
+    return () => {
+
+    }
+  }, [])
 
   return (
     <div>
       <Row>
 
       </Row>
-      <Col  lg='3' md='4' sm='6' xs='12' >
-      <Selector/>
+      <Col lg='3' md='4' sm='6' xs='12' >
+        <Selector />
       </Col>
       <Row>
-      {dataFetch.data.length>0?
-        dataFetch.data.map((item,index)=>(<Card key={index} data={item} />))
-      :'هیچ کالای برانمایش نیست'
-      }
+        {dataFetch.data.length > 0 ?
+          dataFetch.data.map((item, index) => (<Card key={index} data={item} />))
+          : 'هیچ کالای برانمایش نیست'
+        }
       </Row>
-      
+
       <Row>
         <Col lg='12' className='mt-5' >
-        <Pages/>
+          <Pages />
         </Col>
       </Row>
-      
-      
+
+
     </div>
     // <div className={styles.container}>
     //   <Head>
@@ -114,30 +114,30 @@ useEffect(() => {
 }
 export async function getServerSideProps(context) {
 
-  const { baseUrl,page,itemnumber } = store.getState()
-const dataFrom={
-  lm: itemnumber,
-  pg:page,
-  tp:1
-}
+  const { baseUrl, page, itemnumber } = store.getState()
+  const dataFrom = {
+    lm: itemnumber,
+    pg: page,
+    tp: 1
+  }
 
-let dataFetch={}
+  let dataFetch = {}
 
   try {
-    const res= await axios.post(`${baseUrl}/post/search`,JSON.stringify(dataFrom) ,{
-      headers:{
-        "t":'9ZieBz+gYR93+UaEUOFkkhJ7KjISbz/6Tt9svuoYS5A=',
+    const res = await axios.post(`${baseUrl}/post/search`, JSON.stringify(dataFrom), {
+      headers: {
+        "t": '9ZieBz+gYR93+UaEUOFkkhJ7KjISbz/6Tt9svuoYS5A=',
 
         "content-type": "application/json; charset=utf-8 "
       }
     })
 
-dataFetch=res.data.result
+    dataFetch = res.data.result
   } catch (error) {
-    dataFetch={}
+    dataFetch = {}
   }
 
   return {
-    props: {dataFetch}, // will be passed to the page component as props
+    props: { dataFetch }, // will be passed to the page component as props
   }
 }

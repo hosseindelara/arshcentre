@@ -1,9 +1,9 @@
-export const itemnumber=(state=12,action)=>{
-switch (action.type) {
-    case "itemShow":
-        return action.paylod
+export const itemnumber = (state = 12, action) => {
+    switch (action.type) {
+        case "itemShow":
+            return action.paylod
 
-    default:
-        return state ;
-}
+        default:
+            return state;
+    }
 }
