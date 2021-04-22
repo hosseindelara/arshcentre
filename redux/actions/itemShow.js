@@ -1,0 +1,1 @@
+export const itemShow = (number) => ({ type: "number", paylod: parseInt(number) })
